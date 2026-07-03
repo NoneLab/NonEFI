@@ -23,4 +23,12 @@ using EFI_STATUS = UINTN;
 
 using CHAR16 = wchar_t;
 
+struct EfiGuid
+{
+    UINT32 guid1;
+    UINT16 guid2;
+    UINT16 guid3;
+    UINT8  guid4[8];
+};
+
 #endif

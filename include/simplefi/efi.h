@@ -9,7 +9,6 @@
 #ifndef __SIMPLEFI_EFI_H
 #define __SIMPLEFI_EFI_H
 
-#include "defs.h"
 #include "types.h"
 #include <simplefi/protocols/simple_text_input.h>
 #include <simplefi/protocols/simple_text_output.h>
@@ -39,5 +38,10 @@ struct EfiSystemTable
     UINTN                           NumberOfTableEntries;
     void*                           ConfigurationTable;
 };
+
+void InitializeRuntime(
+    EFI_HANDLE ImageHandle, 
+    EfiSystemTable* SystemTable
+);
 
 #endif

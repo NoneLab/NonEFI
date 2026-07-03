@@ -2,8 +2,13 @@ cmake_minimum_required(VERSION 3.20)
 
 project(miniefi LANGUAGES C CXX)
 
+find_package(UefiNewLib REQUIRED)
+
 add_executable(simplefi
     main.cc
+
+    simplefi/guid.cc
+    simplefi/newlib-shim.cc
 )
 
 set_target_properties(simplefi PROPERTIES
@@ -11,6 +16,8 @@ set_target_properties(simplefi PROPERTIES
     SUFFIX ".EFI"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/esp"
 )
+
+target_link_libraries(simplefi PRIVATE UefiNewLib::c_uefi)
 
 target_compile_features(simplefi PRIVATE cxx_std_26)
 
