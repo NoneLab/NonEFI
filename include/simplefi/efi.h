@@ -10,17 +10,11 @@
 #define __SIMPLEFI_EFI_H
 
 #include "types.h"
+#include <simplefi/services/boot_service.h>
+#include <simplefi/services/runtime_service.h>
+#include <simplefi/protocols/device_path.h>
 #include <simplefi/protocols/simple_text_input.h>
 #include <simplefi/protocols/simple_text_output.h>
-
-struct EfiTableHeader 
-{
-    UINT64  Signature;
-    UINT32  Revision;
-    UINT32  HeaderSize;
-    UINT32  CRC32;
-    UINT32  Reserved;
-};
 
 struct EfiSystemTable
 {
@@ -33,8 +27,8 @@ struct EfiSystemTable
     EfiSimpleTextOutputProtocol*    ConOut;
     EFI_HANDLE                      StandardErrorHandle;
     EfiSimpleTextOutputProtocol*    StdErr;
-    void*                           RuntimeServcies;
-    void*                           BootServices;
+    EfiRuntimeServices*             RuntimeServcies;
+    EfiBootServices*                BootServices;
     UINTN                           NumberOfTableEntries;
     void*                           ConfigurationTable;
 };
@@ -43,5 +37,10 @@ void InitializeRuntime(
     EFI_HANDLE ImageHandle, 
     EfiSystemTable* SystemTable
 );
+
+// Declarition main function
+extern "C"
+EFI_STATUS EFIAPI
+EfiMain(EFI_HANDLE ImageHandle, EfiSystemTable* SystemTable);
 
 #endif
