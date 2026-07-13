@@ -1,0 +1,14 @@
+config("public_headers") {
+    include_dirs = ["include"]
+}
+
+static_library("simplefi") {
+    sources = [
+        "simplefi/guid.cc",
+        "simplefi/newlib-shim.cc",
+    ]
+
+    public_configs = [ ":public_headers" ]
+
+    public_deps = [ "//lib/newlib:c_uefi" ]
+}
