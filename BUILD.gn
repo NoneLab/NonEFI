@@ -4,7 +4,8 @@ config("public_headers") {
 
 static_library("simplefi") {
     sources = [
-        "simplefi/guid.cc",
+        "simplefi/utility/guid.cc",
+        "simplefi/utility/runtime.cc",
         "simplefi/newlib-shim.cc",
     ]
 

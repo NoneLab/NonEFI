@@ -16,6 +16,8 @@
 #include <simplefi/protocols/simple_text_input.h>
 #include <simplefi/protocols/simple_text_output.h>
 
+#include <simplefi/utility/runtime.h>
+
 struct EfiSystemTable
 {
     EfiTableHeader                  Hdr;
@@ -32,11 +34,6 @@ struct EfiSystemTable
     UINTN                           NumberOfTableEntries;
     void*                           ConfigurationTable;
 };
-
-void InitializeRuntime(
-    EFI_HANDLE ImageHandle, 
-    EfiSystemTable* SystemTable
-);
 
 // Declarition main function
 extern "C"

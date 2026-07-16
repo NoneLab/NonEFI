@@ -1,5 +1,6 @@
 #include <simplefi/efi.h>
 #include <simplefi/types.h>
+#include <simplefi/utility/runtime.h>
 
 #include <stdio.h>
 #include <stddef.h>
@@ -11,18 +12,6 @@
 #include <sys/types.h>
 #include <locale.h>
 #include <wchar.h>
-
-static EFI_HANDLE gImageHandle = nullptr;
-static EfiSystemTable* gSysTable = nullptr;
-
-void InitializeRuntime(
-    EFI_HANDLE ImageHandle, 
-    EfiSystemTable* SystemTable
-)
-{
-    gImageHandle = ImageHandle;
-    gSysTable = SystemTable;
-}
 
 __BEGIN_DECLS
 
@@ -67,7 +56,7 @@ _ssize_t _write_r(struct _reent *r, int fd, const void *buf, size_t len) {
     (void)fd;
     (void)buf;
 
-    if (!gSysTable)
+    if (!Runtime::GetSysTable())
         return 0;
     
     if (fd == 1)
@@ -82,8 +71,8 @@ _ssize_t _write_r(struct _reent *r, int fd, const void *buf, size_t len) {
         wchar_t tmpDst[256] = {0, };
 
         ascii2wchar(reinterpret_cast<const char*>(buf), tmpDst);
-        gSysTable->ConOut->OutputString(
-            gSysTable->ConOut,
+        Runtime::GetSysTable()->ConOut->OutputString(
+            Runtime::GetSysTable()->ConOut,
             tmpDst
         );
     }

@@ -16,33 +16,33 @@ struct EfiOpenProtocolInformationEntry
 
 using EfiInstallProtocolInterfaceFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE* Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     EfiInterfaceType InterfaceType,
     VOID* Interface
 );
 
 using EfiUninstallProtocolInterfaceFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID* Interface
 );
 
 using EfiReinstallProtocolInterfacefn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID* OldInterface,
     VOID* NewInterface
 );
 
 using EfiRegisterProtocolNotifyFn = EFI_STATUS (EFIAPI *)(
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     EFI_EVENT Event,
     VOID** Registration
 );
 
 using EfiLocateHandleFn = EFI_STATUS (EFIAPI *)(
     EfiLocateSearchType SearchType,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID* SearchKey,
     UINTN* BufferSize,
     EFI_HANDLE* Buffer
@@ -50,19 +50,19 @@ using EfiLocateHandleFn = EFI_STATUS (EFIAPI *)(
 
 using EfiHandleProtocolFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID** Interface
 );
 
 using EfiLocateDevicePathFn = EFI_STATUS (EFIAPI *)(
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     EfiDevicePathProtocol** DevicePath,
     EFI_HANDLE* Device
 );
 
 using EfiOpenProtocolFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID** Interface,
     EFI_HANDLE AgentHandle,
     EFI_HANDLE ControllerHandle,
@@ -71,14 +71,14 @@ using EfiOpenProtocolFn = EFI_STATUS (EFIAPI *)(
 
 using EfiCloseProtocolFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     EFI_HANDLE AgentHandle,
     EFI_HANDLE ControllerHandle
 );
 
 using EfiOpenProtocolInformationFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE Handle,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     EfiOpenProtocolInformationEntry** EntryBuffer,
     UINTN* EntryCount
 );
@@ -104,14 +104,14 @@ using EfiProtocolsPerHandleFn = EFI_STATUS (EFIAPI *)(
 
 using EfiLocateHandleBufferFn = EFI_STATUS (EFIAPI *)(
     EfiLocateSearchType SearchType,
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID* SearchKey,
     UINTN* NoHandles,
     EFI_HANDLE **Buffer
 );
 
 using EfiLocateProtocolFn = EFI_STATUS (EFIAPI *)(
-    EfiGuid* Protocol,
+    const EfiGuid* Protocol,
     VOID* Registration,
     VOID** Interface
 );
