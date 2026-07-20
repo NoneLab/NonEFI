@@ -20,6 +20,8 @@ using EfiSimpleFileSystemProtocolOpenVolumeFn = EFI_STATUS (EFIAPI *)(
 
 struct EfiSimpleFileSystemProtocol
 {
+    DEFINE_GUID(EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID);
+    
     UINT64 Revision;
     EfiSimpleFileSystemProtocolOpenVolumeFn OpenVolume;
 };

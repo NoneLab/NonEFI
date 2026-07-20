@@ -64,4 +64,7 @@
 #define EFI_OPEN_PROTOCOL_BY_DRIVER            0x00000010
 #define EFI_OPEN_PROTOCOL_EXCLUSIVE            0x00000020
 
+#define GET_GUID(PROTOCOL) PROTOCOL::GUID
+#define DEFINE_GUID(GUIDVAL)   static constexpr const EfiGuid GUID = GUIDVAL
+
 #endif

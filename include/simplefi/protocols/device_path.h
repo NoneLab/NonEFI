@@ -1,6 +1,7 @@
 #ifndef __SIMPLEFI_PROTOCOLS_DEVICE_PATH_H
 #define __SIMPLEFI_PROTOCOLS_DEVICE_PATH_H
 
+#include <simplefi/defs.h>
 #include <simplefi/types.h>
 
 #define EFI_DEVICE_PATH_PROTOCOL_GUID \
@@ -11,6 +12,8 @@ extern const EfiGuid DevicePathProtocolGuid;
 
 struct EfiDevicePathProtocol
 {
+    DEFINE_GUID(EFI_DEVICE_PATH_PROTOCOL_GUID);
+    
     UINT8 Type;
     UINT8 SubType;
     UINT8 Length[2];

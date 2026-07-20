@@ -25,6 +25,8 @@ using EfiInputReadKeyFn = EFI_STATUS (EFIAPI*)(
 
 struct EfiSimpleTextInputProtocol
 {
+    DEFINE_GUID(EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID);
+    
     EfiInputResetFn     Reset;
     EfiInputReadKeyFn   ReadKeyStroke;
     EFI_EVENT           WaitForKey;

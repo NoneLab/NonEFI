@@ -44,6 +44,7 @@ struct EfiBootServices
     VOID* Reserved; // Just Reserved :=D
     EfiRegisterProtocolNotifyFn RegisterProtocolNotify;
     EfiLocateHandleFn LocateHandle;
+    EfiLocateDevicePathFn LocateDevicePath;
     EfiInstallConfigurationTableFn InstallConfigurationTable;
 
     // Image Services

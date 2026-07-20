@@ -1,7 +1,7 @@
 #ifndef __SIMPLEFI_PROTOCOLS_FILE_H
 #define __SIMPLEFI_PROTOCOLS_FILE_H
 
-#include "simplefi/defs.h"
+#include <simplefi/defs.h>
 #include <simplefi/types.h>
 
 #define EFI_FILE_PROTOCOL_REVISION           0x00010000

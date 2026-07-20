@@ -60,7 +60,7 @@ using EfiLocateDevicePathFn = EFI_STATUS (EFIAPI *)(
     EFI_HANDLE* Device
 );
 
-using EfiOpenProtocolFn = EFI_STATUS (EFIAPI *)(
+using EfiOpenProtocolFn = EFI_STATUS (*)(
     EFI_HANDLE Handle,
     const EfiGuid* Protocol,
     VOID** Interface,
