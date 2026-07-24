@@ -6,10 +6,25 @@ static_library("simplefi") {
     sources = [
         "simplefi/utility/guid.cc",
         "simplefi/utility/runtime.cc",
+        "simplefi/utility/shell.cc",
         "simplefi/newlib-shim.cc",
+        "simplefi/new.cc",
+        "simplefi/abort.cc",
     ]
 
-    public_configs = [ ":public_headers" ]
+    configs = [
+        "//build/config:freestanding_x64",
+        "//build/config:warnings",
+        "//build/config:cxx26_no_runtime",
+    ]
 
-    public_deps = [ "//lib/newlib:c_uefi" ]
+    public_configs = [ 
+        ":public_headers",
+        "//build/config:uefi_stdinc",
+    ]
+
+    public_deps = [ 
+        "//lib/newlib:c_uefi",
+        "//lib/ltl:ltl",
+    ]
 }

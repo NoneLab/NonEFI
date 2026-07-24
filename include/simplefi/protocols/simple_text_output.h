@@ -17,7 +17,7 @@ using EfiTextResetFn = EFI_STATUS (EFIAPI * )(
 
 using EfiTextStringFn = EFI_STATUS (EFIAPI * )(
     EfiSimpleTextOutputProtocol* This,
-    CHAR16*                     String
+    const CHAR16*                String
 );
 
 using EfiTextTestStringFn = EFI_STATUS (EFIAPI * )(
@@ -70,7 +70,7 @@ struct SimpleTextOutputMode
 struct EfiSimpleTextOutputProtocol 
 {
     DEFINE_GUID(EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID);
-    
+
     EfiTextResetFn Reset;
     EfiTextStringFn OutputString;
     EfiTextTestStringFn TestString;

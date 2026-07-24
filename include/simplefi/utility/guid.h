@@ -1,9 +1,19 @@
 #ifndef __SIMPLEFI_GUID_TABLE_H
 #define __SIMPLEFI_GUID_TABLE_H
 
+#include <expected>
 #include <simplefi/types.h>
 #include <simplefi/defs.h>
 #include <simplefi/utility/runtime.h>
+
+#include <ltl/memory.h>
+#include <ltl/expected.h>
+
+template<typename Protocol>
+struct ProtocolDeleter;
+
+template<typename Protocol>
+using ProtocolPtr = ltl::unique_ptr<Protocol, ProtocolDeleter<Protocol>>;
 
 EFI_STATUS OpenProtocol(
     EFI_HANDLE handle,
@@ -11,13 +21,48 @@ EFI_STATUS OpenProtocol(
     VOID** outProtocol
 );
 
-template<typename Protocol>
-EFI_STATUS OpenProtocol(
+EFI_STATUS CloseProtocol(
     EFI_HANDLE handle,
-    Protocol*& protocol
+    const EfiGuid& guid
+);
+
+template<typename Protocol>
+EFI_STATUS CloseProtocol(
+    EFI_HANDLE handle
 )
 {
-    return OpenProtocol(handle, GET_GUID(Protocol), reinterpret_cast<VOID**>(&protocol));
+    return CloseProtocol(handle, GET_GUID(Protocol));
 }
+
+template<typename Protocol>
+ltl::expected<ProtocolPtr<Protocol>, EFI_STATUS> OpenProtocol(
+    EFI_HANDLE handle
+)
+{
+    VOID* protocol = nullptr;
+    auto status = OpenProtocol(handle, GET_GUID(Protocol), &protocol);
+    if (status)
+        return ltl::unexpected(status);
+
+    return ProtocolPtr<Protocol>(
+        reinterpret_cast<Protocol*>(protocol),
+        ProtocolDeleter<Protocol> {
+            handle
+        }
+    );
+}
+
+template<typename Protocol>
+struct ProtocolDeleter
+{
+    EFI_HANDLE handle = nullptr;
+    void operator()(Protocol* passed)
+    {
+        UNUSED_PARAMETER(passed);
+
+        if (!handle)
+            CloseProtocol<Protocol>(handle);
+    }
+};
 
 #endif

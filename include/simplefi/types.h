@@ -18,6 +18,7 @@ using UINTN = uintptr_t;
 
 using EFI_HANDLE = void*;
 using EFI_EVENT  = EFI_HANDLE;
+using SHELL_FILE_HANDLE = EFI_HANDLE;
 using EFI_STATUS = UINTN;
 
 using EfiPhysicalAddress = UINT64;

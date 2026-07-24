@@ -9,6 +9,8 @@
 #include <simplefi/efi.h>
 #include <simplefi/utility/runtime.h>
 
+#include <stdio.h>
+
 EFI_STATUS OpenProtocol(
     EFI_HANDLE handle,
     const EfiGuid& guid,
@@ -25,4 +27,23 @@ EFI_STATUS OpenProtocol(
         nullptr,
         EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
     );
+}
+
+EFI_STATUS CloseProtocol(
+    EFI_HANDLE handle,
+    const EfiGuid& guid
+)
+{
+    auto bs = Runtime::GetSysTable()->BootServices;
+
+    auto status =  bs->CloseProtocol(
+        handle,
+        &guid,
+        Runtime::GetHandle(),
+        nullptr
+    );
+
+    printf("Check Close Return value : 0x%llx", status);
+
+    return status;
 }

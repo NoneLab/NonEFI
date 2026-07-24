@@ -13,6 +13,9 @@
 #include <locale.h>
 #include <wchar.h>
 
+#include <ltl/span.h>
+#include <ltl/memory.h>
+
 __BEGIN_DECLS
 
 struct _reent _impure_data = _REENT_INIT(_impure_data);
@@ -55,25 +58,24 @@ _ssize_t _write_r(struct _reent *r, int fd, const void *buf, size_t len) {
     (void)r;
     (void)fd;
     (void)buf;
+    size_t i;
 
     if (!Runtime::GetSysTable())
         return 0;
     
     if (fd == 1)
     {
-        auto ascii2wchar = [](const char* src, wchar_t* dst){
-            while(*src)
-            {
-                *dst++ = static_cast<wchar_t>(*src++);
-            }
-            *dst = L'\0';
-        };
-        wchar_t tmpDst[256] = {0, };
+        ltl::span<const char> strBuf = { reinterpret_cast<const char*>(buf), len };
+        ltl::unique_ptr<wchar_t[]> tmpDst(new wchar_t[len + 1]);
 
-        ascii2wchar(reinterpret_cast<const char*>(buf), tmpDst);
+        for(i = 0; i < strBuf.size(); i++)
+            tmpDst[i] = static_cast<wchar_t>(strBuf[i]);
+
+        tmpDst[strBuf.size()] = L'\0';
+
         Runtime::GetSysTable()->ConOut->OutputString(
             Runtime::GetSysTable()->ConOut,
-            tmpDst
+            tmpDst.get()
         );
     }
     return (_ssize_t)len;
@@ -111,7 +113,7 @@ int _isatty_r(struct _reent *r, int fd) {
 int _vfprintf_r(struct _reent *r,
    FILE *fp,
    const char *fmt,
-   va_list ap) {
+   __va_list ap) {
     return _vfiprintf_r(r, fp, fmt, ap);
 }
 

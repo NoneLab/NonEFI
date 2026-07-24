@@ -67,4 +67,6 @@
 #define GET_GUID(PROTOCOL) PROTOCOL::GUID
 #define DEFINE_GUID(GUIDVAL)   static constexpr const EfiGuid GUID = GUIDVAL
 
+#define UNUSED_PARAMETER(VAL) (VOID) VAL
+
 #endif
