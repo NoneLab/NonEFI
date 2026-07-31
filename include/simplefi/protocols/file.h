@@ -38,7 +38,7 @@ struct EfiFileIoToken
 using EfiFileOpenFn = EFI_STATUS (EFIAPI *)(
     EfiFileProtocol* This,
     EfiFileProtocol** NewHandle,
-    CHAR16* FileName,
+    const CHAR16* FileName,
     UINT64 OpenMode,
     UINT64 Attributes
 );
@@ -60,7 +60,7 @@ using EfiFileReadFn = EFI_STATUS (EFIAPI *)(
 using EfiFileWriteFn = EFI_STATUS (EFIAPI *)(
     EfiFileProtocol* This,
     UINTN* BufferSize,
-    VOID* Buffer
+    CONST VOID* Buffer
 );
 
 using EfiFileOpenExFn = EFI_STATUS (EFIAPI *)(

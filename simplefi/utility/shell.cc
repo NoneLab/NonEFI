@@ -9,9 +9,9 @@
 #include <ltl/string_view.h>
 #include <ltl/utility.h>
 
-ltl::expected<ltl::vector<ltl::vector<wchar_t>>, EFI_STATUS> GetShellParameters()
+ltl::expected<ltl::vector<ltl::vector<CHAR16>>, EFI_STATUS> GetShellParameters()
 {
-    ltl::vector<ltl::vector<wchar_t>> ret;
+    ltl::vector<ltl::vector<CHAR16>> ret;
 
     ProtocolPtr<EfiShellParametersProtocol> shellParam = nullptr;
 

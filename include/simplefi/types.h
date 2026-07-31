@@ -29,6 +29,7 @@ using EfiTPL = UINTN;
 
 #define EFI_SUCCESS ((EFI_STATUS)0)
 
+using CHAR8 = char;
 using CHAR16 = wchar_t;
 
 // Memory Type

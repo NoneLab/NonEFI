@@ -1,5 +1,5 @@
-#ifndef __SIMPLEFI_GUID_TABLE_H
-#define __SIMPLEFI_GUID_TABLE_H
+#ifndef __SIMPLEFI_UTILITY_GUID_H
+#define __SIMPLEFI_UTILITY_GUID_H
 
 #include <expected>
 #include <simplefi/types.h>
@@ -60,8 +60,8 @@ struct ProtocolDeleter
     {
         UNUSED_PARAMETER(passed);
 
-        if (!handle)
-            CloseProtocol<Protocol>(handle);
+        if (!this->handle)
+            CloseProtocol<Protocol>(this->handle);
     }
 };
 
