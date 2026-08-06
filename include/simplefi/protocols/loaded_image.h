@@ -32,6 +32,9 @@ struct EfiLoadedImageProtocol
     EfiDevicePathProtocol* FilePath;
     VOID* Reserved;
 
+    UINT32 LoadOptionsSize;
+    VOID* LoadOptions;
+
     VOID* ImageBase;
     UINT64 ImageSize;
     EfiMemoryType ImageCodeType;

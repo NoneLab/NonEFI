@@ -1,10 +1,11 @@
 #ifndef __SIMPLEFI_UTILITY_GUID_H
 #define __SIMPLEFI_UTILITY_GUID_H
 
-#include <expected>
 #include <simplefi/types.h>
 #include <simplefi/defs.h>
 #include <simplefi/utility/runtime.h>
+
+#include <expected>
 
 #include <ltl/memory.h>
 #include <ltl/expected.h>

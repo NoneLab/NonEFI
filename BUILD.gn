@@ -27,5 +27,6 @@ static_library("simplefi") {
     public_deps = [ 
         "//lib/newlib:c_uefi",
         "//lib/ltl:ltl",
+        "//lib/pepe:pepe",
     ]
 }

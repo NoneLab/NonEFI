@@ -27,7 +27,13 @@ using EfiVirtualAddress = UINT64;
 // Task Priority
 using EfiTPL = UINTN;
 
-#define EFI_SUCCESS ((EFI_STATUS)0)
+#define EFI_SUCCESS             ((EFI_STATUS)0)
+#define EFI_LOAD_ERROR          ((EFI_STATUS)1)
+#define EFI_INVALID_PARAMETER   ((EFI_STATUS)2)
+#define EFI_UNSUPPORTED         ((EFI_STATUS)3)
+#define EFI_BAD_BUFFER_SIZE     ((EFI_STATUS)4)
+#define EFI_BUFFER_TOO_SMALL    ((EFI_STATUS)5)
+#define EFI_NOT_READY           ((EFI_STATUS)6)
 
 using CHAR8 = char;
 using CHAR16 = wchar_t;
