@@ -20,8 +20,7 @@ void CallConsturctor()
 {
     if (auto ret = OpenProtocol<EfiLoadedImageProtocol>(gImageHandle); ret.has_value())
     {
-        auto loadedImage = ltl::move(ret).value();
-        pepe::PECoff(loadedImage->ImageBase).CallConstructors();
+        pepe::PECoff(ret.value()->ImageBase).CallConstructors();
     }
 }
 
