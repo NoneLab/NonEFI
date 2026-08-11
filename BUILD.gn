@@ -9,6 +9,7 @@ static_library("simplefi") {
         "simplefi/utility/runtime.cc",
         "simplefi/utility/shell.cc",
         "simplefi/newlib-shim.cc",
+        "simplefi/abi.cc",
         "simplefi/new.cc",
         "simplefi/abort.cc",
     ]

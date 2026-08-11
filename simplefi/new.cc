@@ -70,3 +70,8 @@ void operator delete[](void* ptr, std::size_t size)
 {
     operator delete(ptr);
 }
+
+void operator delete(void* ptr, std::align_val_t) noexcept 
+{
+    operator delete(ptr);
+}

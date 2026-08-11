@@ -42,6 +42,30 @@ void *_malloc_r(struct _reent *r, size_t size)
     return nullptr;
 }
 
+void* _calloc_r(
+    struct _reent* r,
+    size_t n,
+    size_t size
+)
+{
+    (void)r;
+    (void)n;
+    (void)size;
+    return nullptr;
+}
+
+void* _realloc_r(
+    struct _reent* r,
+    size_t n,
+    size_t size
+)
+{
+    (void)r;
+    (void)n;
+    (void)size;
+    return nullptr;
+}
+
 void _free_r(struct _reent *r, void *ptr) {
     (void)r;
     (void)ptr;
@@ -115,6 +139,30 @@ int _vfprintf_r(struct _reent *r,
    const char *fmt,
    __va_list ap) {
     return _vfiprintf_r(r, fp, fmt, ap);
+}
+
+[[noreturn]]
+void _exit(int status)
+{
+    const EFI_STATUS efi_stautus = (status == 0) ? EFI_SUCCESS : EFI_LOAD_ERROR;
+
+    Runtime::GetSysTable()->BootServices->Exit(
+        Runtime::GetHandle(),
+        efi_stautus,
+        0,
+        nullptr
+    );
+
+    for (;;)
+    {
+        __builtin_trap();
+    }
+}
+
+[[noreturn]]
+void abort()
+{
+    _exit(1);
 }
 
 __END_DECLS

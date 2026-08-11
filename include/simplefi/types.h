@@ -34,6 +34,7 @@ using EfiTPL = UINTN;
 #define EFI_BAD_BUFFER_SIZE     ((EFI_STATUS)4)
 #define EFI_BUFFER_TOO_SMALL    ((EFI_STATUS)5)
 #define EFI_NOT_READY           ((EFI_STATUS)6)
+#define EFI_ABORTED             ((EFI_STATUS)21)
 
 using CHAR8 = char;
 using CHAR16 = wchar_t;
